@@ -4,6 +4,7 @@ import {dbConnect} from "./utils/db";
 import {handleError} from "./utils/errors";
 import rateLimit from "express-rate-limit";
 import bodyParser from "body-parser";
+import {postsRouter} from "./routes/posts.router";
 
 const app = express();
 
@@ -16,6 +17,8 @@ app.use(rateLimit({
     windowMs: 3 * 60 * 1000,
     max: 100,
 }));
+
+app.use('/posts', postsRouter)
 
 app.use(handleError)
 

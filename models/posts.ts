@@ -8,7 +8,7 @@ const postsSchema = new mongoose.Schema<PostsEntity>({
     tags: [String],
     selectedFile: String,
     likes: {type: [String], default: []},
-    createdAt: {type: Date, default: new Date(), required: true},
+    createdAt: {type: Date, default: new Date()},
 })
 
 export const Posts = mongoose.model('Posts', postsSchema);
