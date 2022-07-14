@@ -1,16 +1,16 @@
 import mongoose from "mongoose";
-import {PostsEntity} from "../types/postsEntity";
+import {PostEntity} from "../types/posts/postsEntity";
 
-const postsSchema = new mongoose.Schema<PostsEntity>({
-    author: {type: String, required: true},
-    title: {type: String, required: true},
-    message: String,
+const postsSchema = new mongoose.Schema<PostEntity>({
+    // author: {type: String, required: true},
+    title: {type: String, required: true, maxlength: 50},
+    message: {type: String, maxlength: 1000},
     tags: [String],
     selectedFile: String,
     likes: {type: [String], default: []},
     createdAt: {type: Date, default: new Date()},
 })
 
-export const Posts = mongoose.model('Posts', postsSchema);
+export const Posts = mongoose.model<PostEntity>('Posts', postsSchema);
 
 

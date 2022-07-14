@@ -1,14 +1,16 @@
-import {PostsEntity} from "../types/postsEntity";
+import {PostsEntity} from "../types/posts/postsEntity";
 import {PostsRecords} from "../records/posts.records";
 import {dbConnect} from "../utils/db";
 
 const defaultObj: PostsEntity = {
+    _id: '',
     title: 'test',
     message: 'test',
     author: 'test',
     tags: ['test'],
     selectedFile: 'test',
     likes: ['test'],
+    createdAt: new Date(),
 }
 
 beforeAll(async () => await dbConnect());
