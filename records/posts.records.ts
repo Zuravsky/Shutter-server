@@ -1,4 +1,4 @@
-import {CreatePostEntity, PostEntity, PostsEntity} from "../types/posts/postsEntity";
+import {CreatePostEntity, PostEntity, PostsEntity} from "../types";
 import {Posts} from "../models/posts";
 
 export class PostsRecords {
@@ -11,16 +11,16 @@ export class PostsRecords {
         return (await Posts.findById(id));
     }
 
-    static async createPost(post: PostsEntity): Promise<string> {
+    static async createPost(post: PostEntity): Promise<PostEntity> {
         const newPost = new Posts(post);
 
         await newPost.save();
 
-        return newPost._id.toString();
+        return newPost;
     }
 
     static async updatePost(id: string, post: CreatePostEntity): Promise<void> {
-        await Posts.findByIdAndUpdate(id, {...post}, {new: true})
+        return (await Posts.findByIdAndUpdate(id, {...post}, {new: true}))
     }
 
     static async deletePost(id: string): Promise<void> {

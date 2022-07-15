@@ -1,12 +1,10 @@
-import {PostsEntity} from "../types/posts/postsEntity";
+import {PostEntity} from "../types";
 import {PostsRecords} from "../records/posts.records";
 import {dbConnect} from "../utils/db";
 
-const defaultObj: PostsEntity = {
-    _id: '',
+const defaultObj: PostEntity = {
     title: 'test',
     message: 'test',
-    author: 'test',
     tags: ['test'],
     selectedFile: 'test',
     likes: ['test'],
@@ -16,7 +14,9 @@ const defaultObj: PostsEntity = {
 beforeAll(async () => await dbConnect());
 
 test('PostsRecord.createPost can create post and return id', async () => {
-    const newPostId = await PostsRecords.createPost(defaultObj);
+    const newPost = await PostsRecords.createPost(defaultObj);
+
+    const newPostId = newPost._id.toString()
 
     const getPost = await PostsRecords.getOnePost(newPostId);
 
@@ -34,7 +34,10 @@ test('PostsRecord.getAll returns array of posts', async () => {
 });
 
 test('PostsRecord.getOnePost returns data from database for one entry', async () => {
-    const newPostId = await PostsRecords.createPost(defaultObj)
+    const newPost = await PostsRecords.createPost(defaultObj)
+
+    const newPostId = newPost._id.toString()
+
     const post = await PostsRecords.getOnePost(newPostId)
 
     expect(post).toBeDefined()
@@ -42,14 +45,19 @@ test('PostsRecord.getOnePost returns data from database for one entry', async ()
 })
 
 test('PostsRecord.deletePost removes post from database', async () => {
-    const newPostId = await PostsRecords.createPost(defaultObj)
+    const newPost = await PostsRecords.createPost(defaultObj)
+
+    const newPostId = newPost._id.toString()
+
     const deletedPost = await PostsRecords.deletePost(newPostId)
 
     expect(deletedPost).not.toBeDefined();
 });
 
 test('PostsRecord.updatePost updates post in database', async () => {
-    const newPostId = await PostsRecords.createPost(defaultObj)
+    const newPost = await PostsRecords.createPost(defaultObj)
+    const newPostId = newPost._id.toString()
+
     await PostsRecords.updatePost(newPostId, {...defaultObj, message: 'abcd'});
     const post = await PostsRecords.getOnePost(newPostId);
 

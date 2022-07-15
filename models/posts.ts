@@ -1,10 +1,9 @@
 import mongoose from "mongoose";
-import {PostEntity} from "../types/posts/postsEntity";
+import {PostEntity} from "../types";
 
 const postsSchema = new mongoose.Schema<PostEntity>({
-    // author: {type: String, required: true},
-    title: {type: String, required: true, maxlength: 50},
-    message: {type: String, maxlength: 1000},
+    title: {type: String, maxlength: 50},
+    message: {type: String, maxlength: 500},
     tags: [String],
     selectedFile: String,
     likes: {type: [String], default: []},

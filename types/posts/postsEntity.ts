@@ -2,12 +2,12 @@ export interface CreatePostEntity {
     title: string;
     message: string;
     // author: string;
-    tags: string[] | string;
+    tags: string[];
     selectedFile: string;
 }
 
 export interface PostEntity extends CreatePostEntity {
-    _id: string,
+    _id?: string,
     likes: string[];
     createdAt: Date;
 }

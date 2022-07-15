@@ -11,8 +11,8 @@ const app = express();
 app.use(cors({
     origin: 'http://localhost:3000'
 }))
-app.use(bodyParser.json({limit: '50mb'}));
-app.use(bodyParser.urlencoded({limit: '50mb', extended: true}));
+app.use(bodyParser.json({limit: '10mb'}));
+app.use(bodyParser.urlencoded({limit: '10mb', extended: true}));
 app.use(rateLimit({
     windowMs: 3 * 60 * 1000,
     max: 100,
